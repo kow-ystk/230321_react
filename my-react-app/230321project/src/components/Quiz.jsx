@@ -31,7 +31,9 @@ const Quiz = () => {
     <div className='quiz'>
       {showScore ? (
         <div className='score-section'>
-          You scored {score} out of {quizData.length}
+          あなたの得点は {score} 点です！
+          <br />
+          ( {quizData.length} 点満点中 )
         </div>
       ) : (
         <>
@@ -45,7 +47,7 @@ const Quiz = () => {
           </div>
           <div className='answer-section'>
             {quizData[currentQuestion].options.map((option, index) => (
-              <button key={index} onClick={() => handleAnswerOptionClick(option)}>
+              <button className='answerButton' key={index} onClick={() => handleAnswerOptionClick(option)}>
                 {option}
               </button>
             ))}
