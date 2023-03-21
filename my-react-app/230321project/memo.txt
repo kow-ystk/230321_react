@@ -1,0 +1,210 @@
+react でクイズアプリを作成中です
+次は何をしたらいいですか？
+ただし、APIを使わない方法で教えてください。
+
+src/main.jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+
+my-react-app/230321project/src/App.jsx
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <div className="App">
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://reactjs.org" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </div>
+  )
+}
+
+export default App
+
+
+/src/quiz.json
+
+[
+  {
+    "question": "日本の首都はどこ？",
+    "answers": [
+      { "text": "東京", "correct": true },
+      { "text": "京都", "correct": false },
+      { "text": "大阪", "correct": false },
+      { "text": "名古屋", "correct": false }
+    ]
+  },
+  {
+    "question": "日本の最高峰はどこ？",
+    "answers": [
+      { "text": "富士山", "correct": false },
+      { "text": "立山", "correct": false },
+      { "text": "白山", "correct": false },
+      { "text": "富士山と立山のどちらでもない", "correct": true }
+    ]
+  }
+]
+
+/src/components/Quiz.js
+
+import { useState } from 'react';
+import quizData from '../data/quizData';
+
+const Quiz = () => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [showScore, setShowScore] = useState(false);
+  const [score, setScore] = useState(0);
+
+  const handleAnswerOptionClick = (answer) => {
+    if (answer === quizData[currentQuestion].answer) {
+      setScore(score + 1);
+    }
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < quizData.length) {
+      setCurrentQuestion(nextQuestion);
+    } else {
+      setShowScore(true);
+    }
+  };
+
+  return (
+    <div className='quiz'>
+      {showScore ? (
+        <div className='score-section'>
+          You scored {score} out of {quizData.length}
+        </div>
+      ) : (
+        <>
+          <div className='question-section'>
+            <div className='question-count'>
+              <span>Question {currentQuestion + 1}</span>/{quizData.length}
+            </div>
+            <div className='question-text'>
+              {quizData[currentQuestion].question}
+            </div>
+          </div>
+          <div className='answer-section'>
+            {quizData[currentQuestion].options.map((option, index) => (
+              <button key={index} onClick={() => handleAnswerOptionClick(option)}>
+                {option}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+export default Quiz;
+
+/src/Data/quizData.js
+
+const quizData = [
+  {
+    question: 'Reactはどの言語で書かれているでしょうか？',
+    options: ['JavaScript', 'Ruby', 'Python', 'C++'],
+    answer: 'JavaScript',
+  },
+  {
+    question: 'HTMLのh1タグは何を表しますか？',
+    options: ['見出し1', '見出し2', '見出し3', '見出し4'],
+    answer: '見出し1',
+  },
+  {
+    question: 'CSSのbox-sizingプロパティの初期値は何ですか？',
+    options: ['content-box', 'border-box', 'padding-box', 'margin-box'],
+    answer: 'content-box',
+  },
+];
+export default quizData;
+
+src/Quiz.js
+
+import React from 'react';
+
+const Quiz = ({ question, answers, selectedAnswer, onAnswerSelected }) => {
+  return (
+    <div>
+      <h2>{question}</h2>
+      <ul>
+        {answers.map((answer, index) => (
+          <li key={index}>
+            <label>
+              <input
+                type="radio"
+                value={answer.text}
+                checked={selectedAnswer === answer.text}
+                onChange={(event) => onAnswerSelected(event.target.value)}
+              />
+              {answer.text}
+            </label>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default Quiz;
+
+---
+Reactでクイズアプリを作成する場合、次のステップを進めることをお勧めします。
+
+問題の配列を作成する
+クイズアプリを作成するには、問題の配列が必要です。配列には、各問題の質問、回答の選択肢、正解が含まれます。この配列をReactコンポーネントで使用します。
+
+クイズのスタートページを作成する
+アプリを起動したときに、ユーザーがクイズを始める前に、スタートページを表示することをお勧めします。このページには、クイズのルールや説明が含まれます。このページの作成には、Reactコンポーネントを使用します。
+
+クイズの本体を作成する
+クイズの本体は、質問を表示し、ユーザーが回答を選択できるようにする必要があります。選択した回答が正解かどうかを確認し、ユーザーに得点を与えます。また、クイズが終了したら、得点を表示します。この部分には、Reactコンポーネントを使用します。
+
+クイズの結果ページを作成する
+クイズが終了したら、結果ページを表示することをお勧めします。このページには、ユーザーが得た得点が表示されます。このページの作成には、Reactコンポーネントを使用します。
+
+これらのステップを進めることで、Reactを使用したクイズアプリを作成できます。また、APIを使用することで、より複雑なクイズアプリを作成することもできます。
+
+---
+Reactでクイズアプリを作成するためには、以下の手順を実行する必要があります。
+
+src/App.jsxファイルにおいて、クイズの質問文や回答を管理するために、useStateフックを使用して、適切な状態を定義する必要があります。たとえば、question、options、correctAnswerなどの状態を定義することができます。
+
+クイズの質問文や回答を表示するために、src/App.jsxファイル内で、必要なHTML要素を作成し、適切な状態を表示するようにします。たとえば、<p>要素を使用して、質問文を表示し、<button>要素を使用して、回答の選択肢を表示することができます。
+
+ユーザーの回答を処理するために、onClickハンドラーを使用して、ユーザーの回答をチェックし、正解であれば、適切な状態を更新します。たとえば、setScore関数を使用して、ユーザーの得点を更新することができます。
+
+クイズを進めるために、Nextボタンを作成し、適切な状態を更新するようにします。たとえば、次の質問に進むために、setCurrentQuestion関数を使用して、次の質問の状態を設定することができます。
+
+クイズが終了したときに、ユーザーの得点を表示するように、適切な状態を設定します。たとえば、<p>要素を使用して、ユーザーの得点を表示することができます。
+
+以上が、Reactでクイズアプリを作成するための基本的な手順になります。また、クイズアプリを作成する際には、CSSスタイルを適用して、見栄えを良くすることもできます。
