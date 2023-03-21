@@ -47,7 +47,7 @@ const Quiz = () => {
           <br />
           ( {quizData.length} 点満点中 )
           <br />
-          <button className='retryButton'  onClick={() => setResetQuiz(true)}>Retry</button>
+          <button type="button" className='retryButton'  onClick={() => setResetQuiz(true)}>Retry</button>
         </div>
       ) : (
         <>
@@ -61,7 +61,7 @@ const Quiz = () => {
           </div>
           <div className='answer-section'>
             {quizData[currentQuestion].options.map((option, index) => (
-              <button className='answerButton' key={index} onClick={() => handleAnswerOptionClick(option)}>
+              <button type="button" className='answerButton' key={index} onClick={() => handleAnswerOptionClick(option)}>
                 {option}
               </button>
             ))}
