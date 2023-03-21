@@ -10,6 +10,7 @@ const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
+  const [resetQuiz, setResetQuiz] = useState(false);
 
   /**
    * 問題の回答を処理する
@@ -27,6 +28,17 @@ const Quiz = () => {
     }
   };
 
+  const resetQuizState = () => {
+    setCurrentQuestion(0);
+    setShowScore(false);
+    setScore(0);
+  };
+
+  if (resetQuiz) {
+    resetQuizState();
+    setResetQuiz(false);
+  }
+
   return (
     <div className='quiz'>
       {showScore ? (
@@ -34,6 +46,8 @@ const Quiz = () => {
           あなたの得点は {score} 点です！
           <br />
           ( {quizData.length} 点満点中 )
+          <br />
+          <button className='retryButton'  onClick={() => setResetQuiz(true)}>Retry</button>
         </div>
       ) : (
         <>
