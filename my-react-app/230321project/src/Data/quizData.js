@@ -1,18 +1,18 @@
 const quizData = [
   {
-    question: 'Reactはどの言語で書かれているでしょうか？',
-    options: ['JavaScript', 'Ruby', 'Python', 'C++'],
-    answer: 'JavaScript',
+    question: '以下のうち、卵料理はどれ？',
+    options: ['ハンバーグ', 'オムレツ', '唐揚げ', 'サラダ'],
+    answer: 'オムレツ',
   },
   {
-    question: 'HTMLのh1タグは何を表しますか？',
-    options: ['見出し1', '見出し2', '見出し3', '見出し4'],
-    answer: '見出し1',
+    question: '赤と青を混ぜると何色？',
+    options: ['紫', '黄色', '銀色', '黒'],
+    answer: '紫',
   },
   {
-    question: 'CSSのbox-sizingプロパティの初期値は何ですか？',
-    options: ['content-box', 'border-box', 'padding-box', 'margin-box'],
-    answer: 'content-box',
+    question: '日本の首都はどこですか？',
+    options: ['東京', '大阪', '名古屋', '福岡'],
+    answer: '東京',
   },
 ];
 export default quizData;
