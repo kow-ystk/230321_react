@@ -1,11 +1,20 @@
 import { useState } from 'react';
 import quizData from '../data/quizData';
 
+/**
+  * クイズを表示するコンポーネント
+  *
+  * @returns {JSX.Element} クイズコンポーネントのJSX要素
+  */
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
 
+  /**
+   * 問題の回答を処理する
+   * @param {string} answer - 回答のテキスト
+   */
   const handleAnswerOptionClick = (answer) => {
     if (answer === quizData[currentQuestion].answer) {
       setScore(score + 1);
@@ -46,4 +55,5 @@ const Quiz = () => {
     </div>
   );
 };
+
 export default Quiz;
