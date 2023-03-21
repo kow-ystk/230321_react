@@ -40,3 +40,29 @@
 .read-the-docs {
   color: #888;
 }
+
+.quiz {
+  width: 600px;
+  background: #aa0;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.answer-section {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.answerButton {
+  background-color: #fff;
+  border: none;
+  font-size: 20px;
+  color: #333;
+}
+
+.answerButton:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
